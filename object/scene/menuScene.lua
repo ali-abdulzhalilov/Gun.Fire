@@ -14,4 +14,7 @@ end
 
 function MenuScene:keyPressed(key)
   self.t = self.t - 1
+  if key == "space" then
+    Scene.setScene(game)
+  end
 end

@@ -5,11 +5,14 @@ function love.load()
   love.window.setMode(320, 480)
   love.keyboard.setKeyRepeat(true)
   
-  require "object.scene"
-  require "object.menuScene"
+  require "object.scene.scene"
+  require "object.scene.menuScene"
+  require "object.scene.gameScene"
   
-  game = MenuScene()
-  scene = game
+  menu = MenuScene()
+  game = GameScene()
+  scene = nil
+  Scene.setScene(menu)
 end
 
 function love.update(dt) scene:update(dt) end 
