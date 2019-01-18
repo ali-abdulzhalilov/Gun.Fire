@@ -9,9 +9,9 @@ function love.load()
   require "object.scene.menuScene"
   require "object.scene.gameScene"
   
+  scene = nil
   menu = MenuScene()
   game = GameScene()
-  scene = nil
   Scene.setScene(menu)
 end
 
