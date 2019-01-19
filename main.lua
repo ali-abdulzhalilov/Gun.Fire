@@ -1,11 +1,14 @@
 Object = require "lib.classic"
 local bump = require "lib.bump"
-local inspect = require "lib.inspect"
+inspect = require "lib.inspect"
 Input = require "lib.input"
 
 function love.load()
-  love.window.setMode(320, 480)
-  love.keyboard.setKeyRepeat(true)
+  TILE_SIZE = 32
+  width = 8
+  height = 12
+  
+  love.window.setMode(width * TILE_SIZE, height * TILE_SIZE)
   
   input = Input()
   input:bind("space", "go")
