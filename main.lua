@@ -21,6 +21,8 @@ function love.load()
   recursiveEnumerate('object', object_files)
   requireFiles(object_files)
   
+  r = ResourceManager()
+  
   scene = nil
   menu = MenuScene()
   game = GameScene()
