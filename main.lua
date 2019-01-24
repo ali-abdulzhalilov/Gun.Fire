@@ -2,9 +2,10 @@ Object = require "lib.classic"
 local bump = require "lib.bump"
 inspect = require "lib.inspect"
 Input = require "lib.input"
+json = require "lib.json"
 
 function love.load()
-  TILE_SIZE = 32
+  TILE_SIZE = 64
   width = 8
   height = 12
   
@@ -39,10 +40,11 @@ function recursiveEnumerate(folder, file_list)
     local items = love.filesystem.getDirectoryItems(folder)
     for _, item in ipairs(items) do
         local file = folder .. '/' .. item
-        if love.filesystem.isFile(file) then
-            table.insert(file_list, file)
-        elseif love.filesystem.isDirectory(file) then
-            recursiveEnumerate(file, file_list)
+        local type = love.filesystem.getInfo(file).type
+        if type == "file" then
+          table.insert(file_list, file)
+        elseif type == "directory" then
+          recursiveEnumerate(file, file_list)
         end
     end
 end
@@ -52,4 +54,12 @@ function requireFiles(files)
         local file = file:sub(1, -5)
         require(file)
     end
+end
+
+function strToArr(str)
+  local t = {}
+  for i = 1, #str do
+      t[i] = str:sub(i, i)
+  end
+  return t
 end
