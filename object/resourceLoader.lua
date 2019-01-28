@@ -10,7 +10,6 @@ end
 
 function ResourceManager:loadLevels(files)
   for _, file in ipairs(files) do
-    --local name = strSplit(file:sub(1,-5), "/")
     local name = string.split(file:sub(1,-5), "/")
     name = name[#name]
     

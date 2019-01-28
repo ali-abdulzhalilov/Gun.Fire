@@ -4,25 +4,27 @@ inspect = require "lib.inspect"
 Input = require "lib.input"
 json = require "lib.json"
 
+local keys = {
+  ["space"] = "go",
+  ["up"] = "up",
+  ["down"] = "down",
+  ["left"] = "left",
+  ["right"] = "right",
+}
+
 function love.load()
   TILE_SIZE = 16
-  width = 16
-  height = 24
-  
-  love.window.setMode(width * TILE_SIZE, height * TILE_SIZE)
-  
-  input = Input()
-  input:bind("space", "go")
-  input:bind("up", "up")
-  input:bind("down", "down")
-  input:bind("left", "left")
-  input:bind("right", "right")
+  love.window.setMode(320, 240)
   
   local object_files = {}
   recursiveEnumerate('object', object_files)
   requireFiles(object_files)
   
   r = ResourceManager()
+  input = Input()
+  for k,v in pairs(keys) do
+    input:bind(k, v)
+  end
   
   scene = nil
   menu = MenuScene()
@@ -54,12 +56,4 @@ function requireFiles(files)
         local file = file:sub(1, -5)
         require(file)
     end
-end
-
-function strToArr(str)
-  local t = {}
-  for i = 1, #str do
-      t[i] = str:sub(i, i)
-  end
-  return t
 end
