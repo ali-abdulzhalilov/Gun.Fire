@@ -1,33 +1,41 @@
 Player = Object:extend()
 
-function Player:new(x, y)
+function Player:new(world, x, y)
+  self.world = world
   self.x = x or 0
   self.y = y or 0
+  self.w = TILE_SIZE*0.75
+  self.h = TILE_SIZE*0.75
   self.vx = 0
   self.vy = 0
-  self.ax = 0
-  self.ay = 0
-  self.acc = 1.1
-  self.drag = 0.9
-  self.speed = 500
+  self.speed = 100
+  self.t = 0
+  
+  self.world:add(self, self.x, self.y, self.w, self.h)
 end
 
 function Player:update(dt)
-  self.vx = self.vx + self.ax * self.acc * dt
-  self.vy = self.vy + self.ay * self.acc * dt
-  self.x = self.x + self.vx * self.speed * dt
-  self.y = self.y + self.vy * self.speed * dt
+  local goalX = self.x + self.vx * self.speed * dt
+  local goalY = self.y + self.vy * self.speed * dt
+  local actualX, actualY, cols, len = self.world:move(self, goalX, goalY, self.filter)
+  self.x, self.y = actualX, actualY
+  self.t = self.t + dt
+  for i=1,len do
+    --print('collided with ' .. tostring(cols[i].other) .. " at:" .. self.t)
+  end
   
-  self.vx = self.vx * self.drag
-  self.vy = self.vy * self.drag
-  self.ax, self.ay = 0, 0
+  self.vx, self.vy = 0, 0
+end
+
+function Player:filter(item, other)
+  return "bounce"
 end
 
 function Player:draw()
-  love.graphics.rectangle("line", self.x, self.y, 20, 20)
+  love.graphics.rectangle("line", self.x, self.y, self.w, self.h)
 end
 
 function Player:move(dx, dy)
-  self.ax = dx
-  self.ay = dy
+  self.vx = dx
+  self.vy = dy
 end

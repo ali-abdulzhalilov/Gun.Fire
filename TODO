@@ -1,6 +1,6 @@
 - [x] resource loader
 - [x] load levels
-- [ ] display map from level file
+- [x] display map from level file
 - [ ] load sprites
 - [ ] map/block objects?
 - [ ] tile colliders

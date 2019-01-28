@@ -1,13 +1,13 @@
 Object = require "lib.classic"
-local bump = require "lib.bump"
+bump = require "lib.bump"
 inspect = require "lib.inspect"
 Input = require "lib.input"
 json = require "lib.json"
 
 function love.load()
-  TILE_SIZE = 64
-  width = 8
-  height = 12
+  TILE_SIZE = 16
+  width = 16
+  height = 24
   
   love.window.setMode(width * TILE_SIZE, height * TILE_SIZE)
   
@@ -26,7 +26,7 @@ function love.load()
   
   scene = nil
   menu = MenuScene()
-  game = GameScene()
+  game = GameScene("level01")
   Scene.setScene(menu)
 end
 
