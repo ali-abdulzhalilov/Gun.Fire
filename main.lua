@@ -21,6 +21,7 @@ function love.load()
   requireFiles(object_files)
   
   r = ResourceManager()
+  
   input = Input()
   for k,v in pairs(keys) do
     input:bind(k, v)
