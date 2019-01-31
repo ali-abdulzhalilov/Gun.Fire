@@ -1,17 +1,13 @@
 ResourceManager = Object:extend()
 
 function ResourceManager:new()
-  self.levels = self:loadLevels()
-  
-  
-  
-  
-  self.options = {}
+  self.levels = self:loadLevels('levels')
+  self.options = self:loadOptions('options.cfg')
 end
 
-function ResourceManager:loadLevels()
+function ResourceManager:loadLevels(level_directory)
   local files = {}
-  recursiveEnumerate('levels', files)
+  recursiveEnumerate(level_directory, files)
   local levels = {}
   
   for _, file in ipairs(files) do
@@ -25,6 +21,15 @@ function ResourceManager:loadLevels()
   end
   
   return levels
+end
+
+function ResourceManager:loadOptions(option_filepath)
+  local options = {}
+  
+  local t = love.filesystem.read(option_filepath)
+  options = json.decode(t)      
+  
+  return options
 end
 
 function string.split(str, delim)

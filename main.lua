@@ -4,14 +4,6 @@ inspect = require "lib.inspect"
 Input = require "lib.input"
 json = require "lib.json"
 
-local keys = {
-  ["space"] = "go",
-  ["up"] = "up",
-  ["down"] = "down",
-  ["left"] = "left",
-  ["right"] = "right",
-}
-
 function love.load()
   TILE_SIZE = 16
   love.window.setMode(320, 240)
@@ -23,7 +15,7 @@ function love.load()
   r = ResourceManager()
   
   input = Input()
-  for k,v in pairs(keys) do
+  for k,v in pairs(r.options["keys"]) do
     input:bind(k, v)
   end
   
