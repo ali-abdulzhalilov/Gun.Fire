@@ -2,5 +2,13 @@
 - [x] load levels
 - [x] display map from level file
 - [ ] load sprites
-- [ ] map/block objects?
-- [ ] tile colliders
+- [x] tile colliders
+- [ ] bullet class
+- [ ] player shoot
+- [ ] bullet collision
+- [ ] bullet pool
+- [ ] weapon select
+- [ ] entity class
+- [ ]
+- [ ]
+- [ ]
