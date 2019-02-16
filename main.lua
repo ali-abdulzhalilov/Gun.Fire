@@ -15,8 +15,9 @@ function love.load()
   r = ResourceManager()
   
   input = Input()
-  for k,v in pairs(r.options["keys"]) do
-    input:bind(k, v)
+  for keys, action in pairs(r.options["keys"]) do
+    print(inspect(key))
+    input:bind(action, keys)
   end
   
   scene = nil
