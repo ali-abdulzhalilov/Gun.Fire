@@ -10,12 +10,18 @@ function Player:shoot(dx, dy)
 end
 
 function Player:filter(item, other)
-  print("p "..item)
-  if item then
-    if item:is(Bullet) then
-      return "cross"
-    end
+  --if item and not type(item)=="nil" then
+  --  if type(item)=="number" then
+  --    return "bounce"
+  --  elseif item:is(Bullet) then
+  --    return "cross"
+  --  else
+  --    return "bounce"
+  --  end
+  --end
+  if type(item)=="number" then
+    return "bounce"
+  else
+    return "cross"
   end
-  
-  return "bounce"
 end

@@ -23,12 +23,14 @@ function Bullet:setAlive(value)
 end
 
 function Bullet:filter(item, other)
-  
-  if item then
-    if item:is(Player) then
-      return "cross"
-    else
-      return "bounce"
-    end
-  end
+  return "cross"
+  --if item and not type(item)=="nil" then
+  --  if type(item)=="number" then
+  --    return "bounce"
+   -- elseif item:is(Player) then
+  --    return "cross"
+  --  else
+  --    return "bounce"
+  --  end
+  --end
 end
