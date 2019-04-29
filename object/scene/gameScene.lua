@@ -1,9 +1,9 @@
-require "object/scene/scene"
 GameScene = Scene:extend()
 
 function GameScene:new(level_name)
   self.world = bump.newWorld(TILE_SIZE)
-  self.player = Player(self.world, 100, 100)
+  self.player = Player(self, self.world, 100, 100)
+  self.bullet = Bullet(self, self.world)
   
   self.progress = 0
   self.scroll_speed = 1
@@ -29,17 +29,20 @@ function GameScene:input()
   if input:down("down") then dy = dy + 1 end
   
   self.player:move(dx, dy)
+  if input:down("go") then self.player:shoot(1, 1) end
 end
 
 function GameScene:update(dt)
   self.progress = self.progress + self.scroll_speed * dt
   self.map:update(self.progress)
   self.player:update(dt)
+  self.bullet:update(dt)
 end
 
 function GameScene:draw()
   self.map:draw(self.progress)
   self.player:draw()
+  self.bullet:draw()
   love.graphics.print(self.progress, 0, 0)
 end
 

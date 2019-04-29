@@ -5,7 +5,7 @@ Input = require "lib.input"
 json = require "lib.json"
 
 function love.load()
-  TILE_SIZE = 16
+  TILE_SIZE = 32
   love.window.setMode(320, 240)
   
   local object_files = {}
@@ -15,9 +15,8 @@ function love.load()
   r = ResourceManager()
   
   input = Input()
-  for keys, action in pairs(r.options["keys"]) do
-    print(inspect(key))
-    input:bind(action, keys)
+  for action, keys in pairs(r.options["keys"]) do
+    input:bind(keys, action)
   end
   
   scene = nil
