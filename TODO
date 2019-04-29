@@ -1,14 +1,3 @@
-- [x] resource loader
-- [x] load levels
-- [x] display map from level file
-- [ ] load sprites
-- [x] tile colliders
-- [ ] bullet class
-- [ ] player shoot
-- [ ] bullet collision
+- [ ] proper bullet life cycle
 - [ ] bullet pool
-- [ ] weapon select
-- [ ] entity class
-- [ ]
-- [ ]
-- [ ]
+- [ ] some high- and low-level planning
