@@ -5,6 +5,11 @@ function Player:new(scene, world, x, y)
   self.speed = 100
 end
 
+function Player:draw()
+  love.graphics.setColor(0, 0, 1)
+  love.graphics.rectangle("fill", self.x, self.y, self.w, self.h)
+end
+
 function Player:shoot(dx, dy)
   self.scene.bullet:boop(self.x, self.y, dx, dy)
 end

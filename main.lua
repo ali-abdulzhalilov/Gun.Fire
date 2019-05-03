@@ -50,3 +50,14 @@ function requireFiles(files)
         require(file)
     end
 end
+
+function getUID(length)
+  length = length or 4
+  local alphabet = "abcdefghijklmnopqrstuvwxyz1234567890"
+  local res = ""
+  for i=1,length do
+    local n = math.random(#alphabet)
+    res = res .. alphabet:sub(n,n)
+  end
+  return res
+end

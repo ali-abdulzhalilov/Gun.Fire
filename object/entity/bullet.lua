@@ -3,6 +3,7 @@ Bullet = Entity:extend()
 function Bullet:new(scene, world, x, y)
   Bullet.super.new(self, scene, world, 0, 0, 0.5, 0.5)
   self:setAlive(false)
+  self.name = getUID()
 end
 
 function Bullet:boop(x, y, dx, dy)
@@ -36,7 +37,8 @@ end
 
 function Bullet:draw()
   if self:isAlive() then
-    Bullet.super.draw(self, dt)
+    love.graphics.setColor(1, 1, 1)
+    love.graphics.circle("fill", self.x+self.w/2, self.y+self.h/2, self.w/2, self.h/2)
   end
 end
 
@@ -54,4 +56,8 @@ function Bullet:resolve(cols, len)
       self:setAlive(false)
     end
   end
+end
+
+function Bullet:__tostring()
+  return "Bullet " .. self.name .. " at " .. math.floor(self.x) .. " " .. math.floor(self.y)
 end

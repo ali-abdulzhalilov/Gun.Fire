@@ -1,9 +1,15 @@
 GameScene = Scene:extend()
 
 function GameScene:new(level_name)
+  self._updateOrder = {Player, Bullet}
+  self._drawOrder = {Player, Bullet}
+  self._entities = {}
+  
   self.world = bump.newWorld(TILE_SIZE)
   self.player = Player(self, self.world, 100, 100)
   self.bullet = Bullet(self, self.world)
+  self:addEntity(self.player)
+  self:addEntity(self.bullet)
   
   self.progress = 0
   self.scroll_speed = 1
@@ -19,6 +25,10 @@ function GameScene:new(level_name)
   self.world:add("right", self.width*TILE_SIZE, 0, TILE_SIZE, self.height*TILE_SIZE)
 end
 
+function GameScene:addEntity(entity)
+  self._entities[#self._entities+1] = entity
+end
+
 function GameScene:input()
   local dx = 0
   if input:down("left") then dx = dx - 1 end
@@ -29,20 +39,41 @@ function GameScene:input()
   if input:down("down") then dy = dy + 1 end
   
   self.player:move(dx, dy)
+  
   if input:down("go") then self.player:shoot(1, 1) end
+  if input:pressed("print") then 
+    for i,entity in pairs(self._entities) do
+      print(entity)
+    end
+  end
 end
 
 function GameScene:update(dt)
   self.progress = self.progress + self.scroll_speed * dt
+  
   self.map:update(self.progress)
-  self.player:update(dt)
-  self.bullet:update(dt)
+  
+  for i, class in pairs(self._updateOrder) do
+    for j, entity in pairs(self._entities) do
+      if entity:is(class) then
+        entity:update(dt)
+      end
+    end
+  end
 end
 
 function GameScene:draw()
   self.map:draw(self.progress)
-  self.player:draw()
-  self.bullet:draw()
+  
+  for i, class in pairs(self._drawOrder) do
+    for j, entity in pairs(self._entities) do
+      if entity:is(class) then
+        entity:draw()
+      end
+    end
+  end
+  
+  love.graphics.setColor(1, 1, 1)
   love.graphics.print(self.progress, 0, 0)
 end
 

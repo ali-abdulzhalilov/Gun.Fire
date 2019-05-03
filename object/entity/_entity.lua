@@ -19,6 +19,7 @@ function Entity:update(dt)
 end
 
 function Entity:draw()
+  love.graphics.setColor(0.5, 0.5, 0.5)
   love.graphics.rectangle("line", self.x, self.y, self.w, self.h)
 end
 
@@ -46,4 +47,8 @@ function Entity:resolve(cols, len)
   for i=1,len do
     --print('collided with ' .. tostring(cols[i].other) .. " at:" .. self.t)
   end
+end
+
+function Entity:__tostring()
+  return "Entity at " .. math.floor(self.x) .. " " .. math.floor(self.y)
 end
