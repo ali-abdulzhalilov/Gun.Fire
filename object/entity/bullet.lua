@@ -56,6 +56,11 @@ function Bullet:resolve(cols, len)
   for i=1,len do
     if type(cols[i].other)=="number" then
       self:setAlive(false)
+    elseif cols[i].other.is then
+      if cols[i].other:is(Enemy) then
+        cols[i].other:die()
+      end
+      print(cols[i].other)
     end
   end
 end

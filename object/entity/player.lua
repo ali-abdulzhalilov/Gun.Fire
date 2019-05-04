@@ -38,3 +38,7 @@ function Player:filter(item, other)
     return "cross"
   end
 end
+
+function Player:__tostring()
+  return "Player at " .. math.floor(self.x) .. " " .. math.floor(self.y)
+end

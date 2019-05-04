@@ -1,5 +1,5 @@
-[ ] enemy entity
-[ ] enemy death
+[x] enemy entity
+[x] enemy death
 [ ] enemy spawn on progress
 [ ] enemy spawn stored in level
 [ ] enemy movement

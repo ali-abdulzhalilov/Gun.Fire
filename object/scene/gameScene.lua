@@ -1,21 +1,23 @@
 GameScene = Scene:extend()
 
 function GameScene:new(level_name)
-  self._updateOrder = {Player, Bullet}
-  self._drawOrder = {Player, Bullet}
-  self._entities = {}
+  self.level = r.levels[level_name]
+  self.width = 16
+  self.height = 16
   
   self.world = bump.newWorld(TILE_SIZE)
-  self.player = Player(self, self.world, 100, 100)
-  self:addEntity(self.player)
+  self.map = Map(self.world, self.level["map"])
+  
+  self._updateOrder = {Player, Enemy, Bullet}
+  self._drawOrder = {Player, Enemy, Bullet}
+  self._entities = {}
+  
+  self.player = Player(self, self.world, (self.width/2-0.5)*TILE_SIZE, 400)
+  self.enemy = Enemy(self, self.world)
+  self.enemy:spawn(200, 50)
   
   self.progress = 0
   self.scroll_speed = 1
-  
-  self.level = r.levels[level_name]
-  self.map = Map(self.world, self.level["map"])
-  self.width = 16
-  self.height = 16
   
   self.world:add("top", 0, -TILE_SIZE, self.width*TILE_SIZE, TILE_SIZE)
   self.world:add("bottom", 0, self.height*TILE_SIZE, self.width*TILE_SIZE, TILE_SIZE)
@@ -24,7 +26,7 @@ function GameScene:new(level_name)
 end
 
 function GameScene:addEntity(entity)
-  self._entities[#self._entities+1] = entity
+  table.insert(self._entities, entity)
 end
 
 function GameScene:input()

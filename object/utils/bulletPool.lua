@@ -6,7 +6,6 @@ function BulletPool:new(scene, world, count)
   for i=1,count do
     local bullet = Bullet(scene, world)
     table.insert(self._bullets, bullet)
-    scene:addEntity(bullet)
   end
 end
 
