@@ -1,8 +1,8 @@
 [x] enemy entity
 [x] enemy death
-[ ] enemy spawn on progress
-[ ] enemy spawn stored in level
+[x] enemy spawn on progress
 [ ] enemy movement
+[ ] enemy spawn stored in level
 [ ] enemy shoot
 [ ] enemy ai
 [ ] bullet kill player and enemy

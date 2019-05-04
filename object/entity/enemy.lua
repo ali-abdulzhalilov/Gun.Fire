@@ -33,15 +33,6 @@ function Enemy:draw()
   end
 end
 
-
-function Enemy:filter(item, other)
-  --if type(item)=="number" then
-  --  return "bounce"
-  --else
-  --  return "cross"
-  --end
-end
-
 function Enemy:__tostring()
   return "Enemy at " .. math.floor(self.x) .. " " .. math.floor(self.y)
 end

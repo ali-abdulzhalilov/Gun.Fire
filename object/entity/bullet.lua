@@ -44,14 +44,6 @@ function Bullet:draw()
   end
 end
 
-function Bullet:filter(item, other)
-  --if type(item)=="number" then
-    --return "touch"
-  --else
-    return "cross"
-  --end
-end
-
 function Bullet:resolve(cols, len)
   for i=1,len do
     if type(cols[i].other)=="number" then
@@ -60,7 +52,6 @@ function Bullet:resolve(cols, len)
       if cols[i].other:is(Enemy) then
         cols[i].other:die()
       end
-      print(cols[i].other)
     end
   end
 end

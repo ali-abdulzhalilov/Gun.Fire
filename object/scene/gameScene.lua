@@ -53,8 +53,12 @@ end
 
 function GameScene:update(dt)
   self.progress = self.progress + self.scroll_speed * dt
-  
   self.map:update(self.progress)
+  
+  local t = 2
+  if self.progress > t-dt/2 and self.progress < t+dt/2 then
+    self.enemy:spawn(300, 200)
+  end
   
   for i, class in pairs(self._updateOrder) do
     for j, entity in pairs(self._entities) do

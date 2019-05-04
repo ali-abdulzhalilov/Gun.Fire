@@ -30,7 +30,7 @@ function Entity:move(dx, dy)
 end
 
 function Entity:filter(item, other)
-  return "bounce"
+  return "cross"
 end
 
 function Entity:collide(dt)
