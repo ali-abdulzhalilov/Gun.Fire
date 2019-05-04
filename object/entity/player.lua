@@ -3,6 +3,16 @@ Player = Entity:extend()
 function Player:new(scene, world, x, y)
   Player.super.new(self, scene, world, x, y, 0.75, 0.75)
   self.speed = 100
+  self.bPool = BulletPool(scene, world, 10)
+  
+  self.fireRate = 0.2
+  self._fireTimer = 0
+end
+
+function Player:update(dt)
+  Player.super.update(self, dt)
+  
+  self._fireTimer = self._fireTimer + dt
 end
 
 function Player:draw()
@@ -11,7 +21,11 @@ function Player:draw()
 end
 
 function Player:shoot(dx, dy)
-  self.scene.bullet:boop(self.x, self.y, dx, dy)
+  if self._fireTimer >= self.fireRate then
+    local bullet = self.bPool:getBullet()
+    bullet:boop(self.x, self.y, dx, dy)
+    self._fireTimer = 0
+  end
 end
 
 function Player:filter(item, other)

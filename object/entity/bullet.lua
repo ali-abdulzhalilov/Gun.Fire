@@ -1,6 +1,6 @@
 Bullet = Entity:extend()
 
-function Bullet:new(scene, world, x, y)
+function Bullet:new(scene, world)
   Bullet.super.new(self, scene, world, 0, 0, 0.5, 0.5)
   self:setAlive(false)
   self.name = getUID()

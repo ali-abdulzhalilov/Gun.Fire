@@ -7,9 +7,7 @@ function GameScene:new(level_name)
   
   self.world = bump.newWorld(TILE_SIZE)
   self.player = Player(self, self.world, 100, 100)
-  self.bullet = Bullet(self, self.world)
   self:addEntity(self.player)
-  self:addEntity(self.bullet)
   
   self.progress = 0
   self.scroll_speed = 1
@@ -41,6 +39,7 @@ function GameScene:input()
   self.player:move(dx, dy)
   
   if input:down("go") then self.player:shoot(1, 1) end
+  
   if input:pressed("print") then 
     for i,entity in pairs(self._entities) do
       print(entity)
