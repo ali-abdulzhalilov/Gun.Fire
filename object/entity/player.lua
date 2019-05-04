@@ -22,8 +22,11 @@ end
 
 function Player:shoot(dx, dy)
   if self._fireTimer >= self.fireRate then
-    local bullet = self.bPool:getBullet()
-    bullet:boop(self.x, self.y, dx, dy)
+    local bullet1 = self.bPool:getBullet()
+    local bullet2 = self.bPool:getBullet()
+    local cx, cy = self.x + (self.w-bullet1.w)/2, self.y + (self.h-bullet1.h)/2
+    bullet1:boop(cx-TILE_SIZE, cy, dx, dy)
+    bullet2:boop(cx+TILE_SIZE, cy, dx, dy)
     self._fireTimer = 0
   end
 end

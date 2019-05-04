@@ -4,7 +4,7 @@ function Bullet:new(scene, world)
   Bullet.super.new(self, scene, world, 0, 0, 0.5, 0.5)
   self:setAlive(false)
   self.name = getUID()
-  self.speed = 200
+  self.speed = 250
 end
 
 function Bullet:boop(x, y, dx, dy)
@@ -40,6 +40,7 @@ function Bullet:draw()
   if self:isAlive() then
     love.graphics.setColor(1, 1, 1)
     love.graphics.circle("fill", self.x+self.w/2, self.y+self.h/2, self.w/2, self.h/2)
+    love.graphics.rectangle("line", self.x, self.y, self.w, self.h)
   end
 end
 
