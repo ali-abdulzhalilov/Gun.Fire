@@ -1,7 +1,7 @@
 Bullet = Entity:extend()
 
 function Bullet:new(scene, world)
-  Bullet.super.new(self, scene, world, 0, 0, 0.5, 0.5)
+  Bullet.super.new(self, scene, world, 0, 0, 0.4, 0.4)
   self:setAlive(false)
   self.name = getUID()
   self.speed = 250

@@ -25,22 +25,13 @@ function Player:shoot(dx, dy)
     local bullet1 = self.bPool:getBullet()
     local bullet2 = self.bPool:getBullet()
     local cx, cy = self.x + (self.w-bullet1.w)/2, self.y + (self.h-bullet1.h)/2
-    bullet1:boop(cx-TILE_SIZE, cy, dx, dy)
-    bullet2:boop(cx+TILE_SIZE, cy, dx, dy)
+    bullet1:boop(cx-TILE_SIZE*0.7, cy, dx, dy)
+    bullet2:boop(cx+TILE_SIZE*0.7, cy, dx, dy)
     self._fireTimer = 0
   end
 end
 
 function Player:filter(item, other)
-  --if item and not type(item)=="nil" then
-  --  if type(item)=="number" then
-  --    return "bounce"
-  --  elseif item:is(Bullet) then
-  --    return "cross"
-  --  else
-  --    return "bounce"
-  --  end
-  --end
   if type(item)=="number" then
     return "bounce"
   else
