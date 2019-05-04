@@ -61,3 +61,12 @@ function getUID(length)
   end
   return res
 end
+
+function normalizeVector(vx, vy)
+  local len = math.sqrt(vx*vx + vy*vy)
+  local x, y = 0, 0
+  if len > 0 then
+    x, y = vx/len, vy/len
+  end
+  return x,y
+end

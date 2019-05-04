@@ -38,12 +38,14 @@ function GameScene:input()
   
   self.player:move(dx, dy)
   
-  if input:down("go") then self.player:shoot(1, 1) end
+  local sx = 0
+  local s = 0
+  if input:down("pewLeft") then sx = sx - 1 s=1 end
+  if input:down("pewRight") then sx = sx + 1 s=1 end
   
-  if input:pressed("print") then 
-    for i,entity in pairs(self._entities) do
-      print(entity)
-    end
+  if s==1 then 
+    local x, y = normalizeVector(sx, -1)
+    self.player:shoot(x, y) 
   end
 end
 

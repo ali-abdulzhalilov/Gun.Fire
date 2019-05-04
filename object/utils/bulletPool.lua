@@ -8,10 +8,6 @@ function BulletPool:new(scene, world, count)
     table.insert(self._bullets, bullet)
     scene:addEntity(bullet)
   end
-  
-  for i,b in pairs(self._bullets) do
-    print(b)
-  end
 end
 
 function BulletPool:getBullet()
