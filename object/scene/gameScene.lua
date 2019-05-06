@@ -14,7 +14,11 @@ function GameScene:new(level_name)
   
   self.player = Player(self, self.world, (self.width/2-0.5)*TILE_SIZE, 400)
   self.enemy = Enemy(self, self.world)
-  self.enemy:spawn(200, 50)
+  self.enemy:spawn(100, -50)
+    :addWaypoint(100, 220)
+    :addWaypoint(200, 300)
+    :addWaypoint(400, 120)
+    :addWaypoint(400, -50)
   
   self.progress = 0
   self.scroll_speed = 1
@@ -55,10 +59,10 @@ function GameScene:update(dt)
   self.progress = self.progress + self.scroll_speed * dt
   self.map:update(self.progress)
   
-  local t = 2
-  if self.progress > t-dt/2 and self.progress < t+dt/2 then
-    self.enemy:spawn(300, 200)
-  end
+  --local t = 2
+  --if self.progress > t-dt/2 and self.progress < t+dt/2 then
+  --  self.enemy:spawn(300, 200)
+  --end
   
   for i, class in pairs(self._updateOrder) do
     for j, entity in pairs(self._entities) do

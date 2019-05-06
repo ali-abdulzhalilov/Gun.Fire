@@ -1,15 +1,16 @@
 [x] enemy entity
 [x] enemy death
 [x] enemy spawn on progress
-[ ] enemy movement
-[ ] enemy spawn stored in level
+[x] enemy movement
 [ ] enemy shoot
 [ ] enemy ai
+[ ] enemy spawn stored in level
 [ ] bullet kill player and enemy
 [ ] weapon types
 [ ] basic weapon switch
-[ ] 
-[ ] 
-[ ] 
+[ ] enemy types
+[ ] inventory
+[ ] item pickup
+[ ] enemy weapon drop and pickup?
 [ ] 
 [ ] forward shoot fine-tuning
