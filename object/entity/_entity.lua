@@ -11,7 +11,6 @@ function Entity:new(scene, world, x, y, w, h)
   self.vy = 0
   self.speed = 100
   self.world:add(self, self.x, self.y, self.w, self.h)
-  self.scene:addEntity(self)
 end
 
 function Entity:update(dt)

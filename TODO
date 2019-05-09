@@ -2,10 +2,11 @@
 [x] enemy death
 [x] enemy spawn on progress
 [x] enemy movement
-[ ] enemy shoot
+[x] enemy shoot
+[x] bullet kill player and enemy
 [ ] enemy ai
-[ ] enemy spawn stored in level
-[ ] bullet kill player and enemy
+[ ] enemy waypoints stored in level
+[ ] enemy pool
 [ ] weapon types
 [ ] basic weapon switch
 [ ] enemy types

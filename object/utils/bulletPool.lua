@@ -1,11 +1,12 @@
 BulletPool = Object:extend()
 
-function BulletPool:new(scene, world, count)
+function BulletPool:new(scene, world, count, tag)
   self._bullets = {}
   
   for i=1,count do
-    local bullet = Bullet(scene, world)
+    local bullet = Bullet(scene, world, tag)
     table.insert(self._bullets, bullet)
+    scene:addEntity(bullet)
   end
 end
 

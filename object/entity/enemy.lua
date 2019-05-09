@@ -6,6 +6,10 @@ function Enemy:new(scene, world)
   self.waypoints = {}
   self.currentWaypointIndex = 1
   self.dist = 10
+  
+  self.fireRate = 0.3
+  self._fireTimer = 0
+  self:die()
 end
 
 function Enemy:addWaypoint(x, y)
@@ -20,6 +24,16 @@ function Enemy:moveTo(pos)
   self:move(ndx, ndy)
 end
 
+function Enemy:shoot()
+  local bullet = self.scene.enemyBulletPool:getBullet()
+  local cx, cy = self.x + (self.w-bullet.w)/2, self.y + (self.h-bullet.h)/2
+  
+  local dx, dy = normalizeVector(self.scene.player.x-self.x, self.scene.player.y-self.y)
+  
+  bullet:boop(cx, cy, dx, dy)
+  self._fireTimer = 0
+end
+
 function Enemy:spawn(x, y)
   if not self.world:hasItem(self) then
     self.world:add(self, x, y, self.w, self.h)
@@ -28,6 +42,7 @@ function Enemy:spawn(x, y)
   self.x, self.y = x, y
   self.world:update(self, x, y)
   self.currentWaypointIndex = 1
+  self._fireTimer = 0
   
   return self
 end
@@ -51,6 +66,11 @@ function Enemy:update(dt)
         self.currentWaypointIndex = self.currentWaypointIndex + 1
       end
     end
+    
+    self._fireTimer = self._fireTimer + dt
+    if self._fireTimer >= self.fireRate then
+      self:shoot()
+    end
   end
 end
 
@@ -58,6 +78,14 @@ function Enemy:draw()
   if self.world:hasItem(self) then
     love.graphics.setColor(1, 0.5, 0)
     love.graphics.rectangle("fill", self.x, self.y, self.w, self.h)
+  end
+end
+
+function Enemy:filter(item, other)
+  if type(item)=="number" then
+    return "bounce"
+  else
+    return "cross"
   end
 end
 

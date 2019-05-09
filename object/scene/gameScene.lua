@@ -12,13 +12,16 @@ function GameScene:new(level_name)
   self._drawOrder = {Player, Enemy, Bullet}
   self._entities = {}
   
+  self.enemyBulletPool = BulletPool(self, self.world, 10, "enemy")
   self.player = Player(self, self.world, (self.width/2-0.5)*TILE_SIZE, 400)
+  self:addEntity(self.player)
   self.enemy = Enemy(self, self.world)
-  self.enemy:spawn(100, -50)
+    --:spawn(100, -50)
     :addWaypoint(100, 220)
     :addWaypoint(200, 300)
     :addWaypoint(400, 120)
     :addWaypoint(400, -50)
+  self:addEntity(self.enemy)
   
   self.progress = 0
   self.scroll_speed = 1
@@ -59,10 +62,10 @@ function GameScene:update(dt)
   self.progress = self.progress + self.scroll_speed * dt
   self.map:update(self.progress)
   
-  --local t = 2
-  --if self.progress > t-dt/2 and self.progress < t+dt/2 then
-  --  self.enemy:spawn(300, 200)
-  --end
+  local t = 2
+  if self.progress > t-dt/2 and self.progress < t+dt/2 then
+    self.enemy:spawn(100, -50)
+  end
   
   for i, class in pairs(self._updateOrder) do
     for j, entity in pairs(self._entities) do

@@ -3,7 +3,7 @@ Player = Entity:extend()
 function Player:new(scene, world, x, y)
   Player.super.new(self, scene, world, x, y, 0.75, 0.75)
   self.speed = 100
-  self.bPool = BulletPool(scene, world, 10)
+  self.bPool = BulletPool(scene, world, 10, "player")
   
   self.fireRate = 0.2
   self._fireTimer = 0

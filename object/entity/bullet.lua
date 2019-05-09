@@ -1,10 +1,11 @@
 Bullet = Entity:extend()
 
-function Bullet:new(scene, world)
+function Bullet:new(scene, world, tag)
   Bullet.super.new(self, scene, world, 0, 0, 0.4, 0.4)
   self:setAlive(false)
   self.name = getUID()
   self.speed = 250
+  self.tag = tag
 end
 
 function Bullet:boop(x, y, dx, dy)
@@ -49,8 +50,10 @@ function Bullet:resolve(cols, len)
     if type(cols[i].other)=="number" then
       self:setAlive(false)
     elseif cols[i].other.is then
-      if cols[i].other:is(Enemy) then
+      if cols[i].other:is(Enemy) and self.tag=="player" then
         cols[i].other:die()
+      elseif cols[i].other:is(Player) and self.tag=="enemy" then
+        --print("pep")
       end
     end
   end
